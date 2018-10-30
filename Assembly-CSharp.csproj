@@ -87,16 +87,16 @@
     <Compile Include="Assets\FreeForkLift\Scripts\NewCarUserControl.cs" />
     <Compile Include="Assets\FreeForkLift\Scripts\Reset.cs" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>C:/Users/refus/Documents/카카오톡 받은 파일/AI_Forklift_KAU/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/refus/Documents/GitHub/AI_Forklift_KAU/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/refus/Documents/카카오톡 받은 파일/AI_Forklift_KAU/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/refus/Documents/GitHub/AI_Forklift_KAU/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/refus/Documents/카카오톡 받은 파일/AI_Forklift_KAU/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/refus/Documents/GitHub/AI_Forklift_KAU/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/refus/Documents/카카오톡 받은 파일/AI_Forklift_KAU/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/refus/Documents/GitHub/AI_Forklift_KAU/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>E:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
