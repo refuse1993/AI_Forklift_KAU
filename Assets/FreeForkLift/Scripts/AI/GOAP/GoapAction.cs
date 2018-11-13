@@ -14,6 +14,7 @@ public abstract class GoapAction : MonoBehaviour {
 	 * Figure out a weight that suits the action. 
 	 * Changing it will affect what actions are chosen during planning.*/
 	public float cost = 1f;
+    public Transform ptransform;
 
 	/**
 	 * An action often has to perform on an object. This is that object. Can be null. */

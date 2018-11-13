@@ -28,6 +28,7 @@ public abstract class forklift : MonoBehaviour, IGoap
     public CheckComponent Check;
 
 
+
     HashSet<KeyValuePair<string, object>> worldData = new HashSet<KeyValuePair<string, object>>();
 
     void Start()
@@ -52,10 +53,10 @@ public abstract class forklift : MonoBehaviour, IGoap
         HashSet<KeyValuePair<string, object>> worldData = new HashSet<KeyValuePair<string, object>>();
 
         worldData.Add(new KeyValuePair<string, object>("fault", Check.fault == 1));
-        worldData.Add(new KeyValuePair<string, object>("state1", Check.num == 0));
-        worldData.Add(new KeyValuePair<string, object>("state2", Check.num == 1));
-        worldData.Add(new KeyValuePair<string, object>("state3", Check.num == 2));
-        worldData.Add(new KeyValuePair<string, object>("state4", Check.num == 3));
+        worldData.Add(new KeyValuePair<string, object>("state1", Check.num == 0 ));
+        worldData.Add(new KeyValuePair<string, object>("state2", Check.num == 1 || Check.num == 4 ));
+        worldData.Add(new KeyValuePair<string, object>("state3", Check.num == 2 || Check.num == 5));
+        worldData.Add(new KeyValuePair<string, object>("state4", Check.num == 3 || Check.num == 6));
         worldData.Add(new KeyValuePair<string, object>("boxon", Check.boxon == 0));
 
 
@@ -109,10 +110,12 @@ public abstract class forklift : MonoBehaviour, IGoap
 
     public bool moveAgent(GoapAction nextAction)
     {
-        agent.SetDestination(nextAction.target.transform.position - new Vector3(0, 0, 3f));
+        agent.SetDestination(nextAction.target.transform.position);
 
+        if (agent.pathPending)
+            return false;
 
-        if (agent.remainingDistance <= 0.2f)//근처에 들어오고
+        if (agent.remainingDistance <= 0.3f)//근처에 들어오고
         {
             // we are at the target location, we are done
             Quaternion rot = Quaternion.LookRotation(nextAction.target.transform.position - transform.position);
@@ -128,7 +131,7 @@ public abstract class forklift : MonoBehaviour, IGoap
             }
             Debug.Log(Quaternion.Angle(nextAction.target.transform.rotation, transform.rotation));
 
-            if (Quaternion.Angle(nextAction.target.transform.rotation, transform.rotation) >= 88 && Quaternion.Angle(nextAction.target.transform.rotation, transform.rotation) <= 90)
+            if (Quaternion.Angle(nextAction.target.transform.rotation, transform.rotation) >= 2 && Quaternion.Angle(nextAction.target.transform.rotation, transform.rotation) <= 3.2)
                 agent.isStopped = true;
 
         }

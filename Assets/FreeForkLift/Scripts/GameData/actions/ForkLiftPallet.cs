@@ -44,6 +44,16 @@ public class ForkLiftPallet : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
+        TargetComponent tar = (TargetComponent)agent.GetComponent(typeof(TargetComponent));
+        CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
+        if (check.boxon == 0)
+        {
+            target = tar.targ1;
+        }
+        else
+        {
+            target = tar.GoalT1;
+        }
         return true;
     }
 
@@ -56,6 +66,7 @@ public class ForkLiftPallet : GoapAction
         {
             CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
             check.num += 1;
+            
             reach = true;
         }
         if (h != 0)

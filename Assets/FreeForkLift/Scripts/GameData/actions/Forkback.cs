@@ -11,12 +11,13 @@ public class Forkback : GoapAction
     public Vector3 minY; //The minimum height of the platform
     public Vector3 maxYmast; //The maximum height of the mast
     public Vector3 minYmast; //The minimum height of the mast
-   
 
+    private int flag = 0;
+    private bool parent = false;
     private bool mastMoveTrue = false; //Activate or deactivate the movement of the mast
 
     private bool reached = false;
-    
+
 
     public Forkback()
     {
@@ -52,58 +53,83 @@ public class Forkback : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
+        TargetComponent tar = (TargetComponent)agent.GetComponent(typeof(TargetComponent));
+        CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
+        if (check.boxon == 0) { 
+            target = tar.targ2;
+        }
+        else
+        {
+            target = tar.GoalT2;
+        }
         return true;
     }
 
     public override bool perform(GameObject agent)
     {
-        if (fork.transform.position.y >= maxYmast.y)
+        if (parent == false)
         {
-            mastMoveTrue = true;
+            ptransform.transform.parent = transform;
+            parent = true;
         }
-        if (fork.transform.position.y <= maxYmast.y)
+        
+        float step = 0.03f;
+        Debug.Log("im in");
+        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
+        flag += 1;
+        if (flag > 160)
         {
-            mastMoveTrue = false;
-        }
-        if (fork.transform.position.y > maxY.y)
-        {
-            fork.transform.position = new Vector3(fork.transform.position.x, maxY.y, fork.transform.position.z);
-        }
-        if (fork.transform.position.y < minY.y + 0.01 && fork.transform.position.y > minY.y - 0.01)
-        {
-            CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
-            check.num = 0;
-
-            reached = true;
-        }
-
-        if (fork.transform.position.y < minY.y)
-        {
-            fork.transform.position = new Vector3(fork.transform.position.x, minY.y, fork.transform.position.z);
-        }
-        if (mast.transform.position.y >= maxYmast.y)
-        {
-            mast.transform.position = new Vector3(mast.transform.position.x, maxYmast.y, mast.transform.position.z);
-        }
-
-        if (mast.transform.position.y <= minYmast.y)
-        {
-            mast.transform.position = new Vector3(mast.transform.position.x, minYmast.y, mast.transform.position.z);
-        }
-
-        fork.Translate(-Vector3.up * speedTranslate);
-        if (mastMoveTrue)
+            if (fork.transform.position.y >= maxYmast.y)
             {
-                mast.Translate(-Vector3.up * speedTranslate);
+                mastMoveTrue = true;
+            }
+            if (fork.transform.position.y <= maxYmast.y)
+            {
+                mastMoveTrue = false;
+            }
+            if (fork.transform.position.y > maxY.y)
+            {
+                fork.transform.position = new Vector3(fork.transform.position.x, maxY.y, fork.transform.position.z);
+            }
+            if (fork.transform.position.y < minY.y + 0.01 && fork.transform.position.y > minY.y - 0.01)
+            {
+                CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
+                check.num += 1;
+                if(check.num == 4)
+                {
+                    check.boxon = 1;
+                }
+                reached = true;
+            }
+
+            if (fork.transform.position.y < minY.y)
+            {
+                fork.transform.position = new Vector3(fork.transform.position.x, minY.y, fork.transform.position.z);
+            }
+            if (mast.transform.position.y >= maxYmast.y)
+            {
+                mast.transform.position = new Vector3(mast.transform.position.x, maxYmast.y, mast.transform.position.z);
+            }
+
+            if (mast.transform.position.y <= minYmast.y)
+            {
+                mast.transform.position = new Vector3(mast.transform.position.x, minYmast.y, mast.transform.position.z);
+            }
+
+            fork.transform.Translate(Vector3.down * speedTranslate);
+            if (mastMoveTrue)
+            {
+                mast.transform.Translate(Vector3.down * speedTranslate);
             }
 
 
-        float h = Input.GetAxis("Jump");
-        if (h != 0)
-        {
-            CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
-            check.fault = 1;
-            reached = true;
+            float h = Input.GetAxis("Jump");
+            if (h != 0)
+            {
+                CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
+                check.fault = 1;
+                reached = true;
+            }
         }
         Debug.Log("why not?");
         return true;

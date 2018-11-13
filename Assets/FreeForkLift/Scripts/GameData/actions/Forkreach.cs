@@ -14,6 +14,7 @@ public class Forkreach : GoapAction
     public Vector3 maxYmast; //The maximum height of the mast
     public Vector3 minYmast; //The minimum height of the mast
     public Transform goalComponents;
+    public Transform GoalTransform;
 
     private bool mastMoveTrue = false; //Activate or deactivate the movement of the mast
 
@@ -55,11 +56,26 @@ public class Forkreach : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
+        TargetComponent tar = (TargetComponent)agent.GetComponent(typeof(TargetComponent));
+        CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
+        if (check.boxon == 0) { 
+            target = tar.targ2;
+        }
+        else
+        {
+            target = tar.GoalT2;
+        }
         return true;
     }
     
     public override bool perform(GameObject agent)
     {
+        CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
+        if ( check.boxon == 1)
+        {
+            goalComponents = GoalTransform;
+        }
+
         if (fork.transform.position.y >= maxYmast.y)
         {
             mastMoveTrue = true;
@@ -77,7 +93,6 @@ public class Forkreach : GoapAction
         {
             reached = true;
         }
-
 
         if (fork.transform.position.y < minY.y)
         {

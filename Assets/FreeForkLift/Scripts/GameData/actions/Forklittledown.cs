@@ -12,6 +12,7 @@ public class Forklittledown : GoapAction
     public Vector3 maxYmast; //The maximum height of the mast
     public Vector3 minYmast; //The minimum height of the mast
     public Transform goalComponents;
+    public Transform targetT;
 
     private bool mastMoveTrue = false; //Activate or deactivate the movement of the mast
 
@@ -38,7 +39,7 @@ public class Forklittledown : GoapAction
 
     public override bool requiresInRange()
     {
-        return false; // yes we need to be near a rock
+        return true; // yes we need to be near a rock
     }
 
     public override bool isInRange()
@@ -53,6 +54,15 @@ public class Forklittledown : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
+        TargetComponent tar = (TargetComponent)agent.GetComponent(typeof(TargetComponent));
+        CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
+        if (check.boxon == 0) {
+                target = tar.targ1;
+        }
+        else
+        {
+            target = tar.GoalT1;
+        }
         return true;
     }
 
@@ -60,15 +70,23 @@ public class Forklittledown : GoapAction
     {
 
         CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
+        if (check.updown != 30)
+        {
+            fork.Translate(Vector3.up * speedTranslate);
+            Debug.Log("littledown");
+            check.updown += 1;
+            return true;
+        }
 
         fork.Translate(Vector3.down * speedTranslate);
-        Debug.Log("littledown");
-        check.updown -= 1;
+        check.down += 1;
+        
 
-        if (check.updown == 0)
+        if (check.down == 15)
         {
             check.num += 1;
-            check.boxon = 0;
+            ptransform.transform.parent = targetT;
+            Debug.Log("!!!!!!!!!!!!!!!!!!");
             reached = true;
         }
         return true;

@@ -83,6 +83,7 @@
     <Compile Include="Assets\FreeForkLift\Scripts\GameData\CheckComponent.cs" />
     <Compile Include="Assets\FreeForkLift\Scripts\GameData\Labourers\forkfork.cs" />
     <Compile Include="Assets\FreeForkLift\Scripts\GameData\Labourers\forklift.cs" />
+    <Compile Include="Assets\FreeForkLift\Scripts\GameData\TargetComponent.cs" />
     <Compile Include="Assets\FreeForkLift\Scripts\NewCarController.cs" />
     <Compile Include="Assets\FreeForkLift\Scripts\NewCarUserControl.cs" />
     <Compile Include="Assets\FreeForkLift\Scripts\Reset.cs" />

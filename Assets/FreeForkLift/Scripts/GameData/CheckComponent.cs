@@ -7,4 +7,5 @@ public class CheckComponent : MonoBehaviour
     public int fault;
     public int boxon;
     public int updown;
+    public int down;
 }
