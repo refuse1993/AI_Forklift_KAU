@@ -74,12 +74,10 @@
     <Compile Include="Assets\FreeForkLift\Scripts\GameData\actions\Forkback.cs" />
     <Compile Include="Assets\FreeForkLift\Scripts\GameData\actions\Forkfault.cs" />
     <Compile Include="Assets\FreeForkLift\Scripts\GameData\actions\Forkidle.cs" />
-    <Compile Include="Assets\FreeForkLift\Scripts\GameData\actions\ForkLiftPallet.cs" />
     <Compile Include="Assets\FreeForkLift\Scripts\GameData\actions\Forklittledown.cs" />
     <Compile Include="Assets\FreeForkLift\Scripts\GameData\actions\Forklittleup.cs" />
+    <Compile Include="Assets\FreeForkLift\Scripts\GameData\actions\ForkNoTarget.cs" />
     <Compile Include="Assets\FreeForkLift\Scripts\GameData\actions\Forkreach.cs" />
-    <Compile Include="Assets\FreeForkLift\Scripts\GameData\actions\GetObject.cs" />
-    <Compile Include="Assets\FreeForkLift\Scripts\GameData\actions\PutObject.cs" />
     <Compile Include="Assets\FreeForkLift\Scripts\GameData\CheckComponent.cs" />
     <Compile Include="Assets\FreeForkLift\Scripts\GameData\Labourers\forkfork.cs" />
     <Compile Include="Assets\FreeForkLift\Scripts\GameData\Labourers\forklift.cs" />

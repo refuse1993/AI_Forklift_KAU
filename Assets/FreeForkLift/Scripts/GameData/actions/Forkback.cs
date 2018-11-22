@@ -21,7 +21,7 @@ public class Forkback : GoapAction
 
     public Forkback()
     {
-        addPrecondition("state4", true); // if we have ore we don't want more
+        addPrecondition("state3", true); // if we have ore we don't want more
         addEffect("complete", true);
     }
 
@@ -53,14 +53,14 @@ public class Forkback : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
-        TargetComponent tar = (TargetComponent)agent.GetComponent(typeof(TargetComponent));
         CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
-        if (check.boxon == 0) { 
-            target = tar.targ2;
+        if (check.boxon == 0)
+        {
+            target = forklift.Target[check.tcount].targ2;
         }
         else
         {
-            target = tar.GoalT2;
+            target = forklift.Target[check.tcount].GoalT2;
         }
         return true;
     }
@@ -94,10 +94,22 @@ public class Forkback : GoapAction
             if (fork.transform.position.y < minY.y + 0.01 && fork.transform.position.y > minY.y - 0.01)
             {
                 CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
-                check.num += 1;
-                if(check.num == 4)
+                if (check.num == 2)
                 {
                     check.boxon = 1;
+                    check.num += 1;
+                }
+                else if (check.num == 4 && check.tcount == check.targetLength - 1)
+                {
+                    Debug.Log("eeeeeeeeeeeeeeeeeeeeeeeee");
+                    check.num = 5;
+                    check.boxon = 0;
+
+                }
+                else if(check.num == 4 && check.tcount != check.targetLength - 1)
+                {
+                    check.num = 1;
+                    check.boxon = 0;
                 }
                 reached = true;
             }

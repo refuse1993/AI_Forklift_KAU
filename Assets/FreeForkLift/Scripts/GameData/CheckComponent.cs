@@ -8,4 +8,6 @@ public class CheckComponent : MonoBehaviour
     public int boxon;
     public int updown;
     public int down;
+    public int tcount;
+    public int targetLength;
 }

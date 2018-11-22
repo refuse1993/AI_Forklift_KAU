@@ -56,21 +56,23 @@ public class Forkreach : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
-        TargetComponent tar = (TargetComponent)agent.GetComponent(typeof(TargetComponent));
         CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
-        if (check.boxon == 0) { 
-            target = tar.targ2;
+        if (check.boxon == 0)
+        {
+            target = forklift.Target[check.tcount].targ2;
         }
         else
         {
-            target = tar.GoalT2;
+            target = forklift.Target[check.tcount].GoalT2;
         }
         return true;
     }
     
     public override bool perform(GameObject agent)
     {
+        
         CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
+        
         if ( check.boxon == 1)
         {
             goalComponents = GoalTransform;
@@ -90,7 +92,7 @@ public class Forkreach : GoapAction
         }
 
         if (fork.transform.position.y < goalComponents.transform.position.y + 0.02 && fork.transform.position.y > goalComponents.transform.position.y - 0.02)
-        {
+        {            
             reached = true;
         }
 

@@ -26,16 +26,25 @@ public abstract class forklift : MonoBehaviour, IGoap
     private const float stopDistanceProportion = 0.1f;
     private const float navMeshSampleDistance = 4f;
     public CheckComponent Check;
-
+    public int tt;
+    public static TargetComponent[] Target;
 
 
     HashSet<KeyValuePair<string, object>> worldData = new HashSet<KeyValuePair<string, object>>();
 
     void Start()
     {
+        Target = new TargetComponent[tt];
         if (Check == null)
         {
             Check = gameObject.AddComponent<CheckComponent>() as CheckComponent;
+        }
+        Check.targetLength = Target.Length;
+        int i = 0;
+        while(i < Target.Length)
+        {
+            Target[i] = gameObject.AddComponent<TargetComponent>() as TargetComponent;
+            i++;
         }
     }
 
@@ -54,9 +63,9 @@ public abstract class forklift : MonoBehaviour, IGoap
 
         worldData.Add(new KeyValuePair<string, object>("fault", Check.fault == 1));
         worldData.Add(new KeyValuePair<string, object>("state1", Check.num == 0 ));
-        worldData.Add(new KeyValuePair<string, object>("state2", Check.num == 1 || Check.num == 4 ));
-        worldData.Add(new KeyValuePair<string, object>("state3", Check.num == 2 || Check.num == 5));
-        worldData.Add(new KeyValuePair<string, object>("state4", Check.num == 3 || Check.num == 6));
+        worldData.Add(new KeyValuePair<string, object>("state2", Check.num == 1 || Check.num == 3 ));
+        worldData.Add(new KeyValuePair<string, object>("state3", Check.num == 2 || Check.num == 4));
+        worldData.Add(new KeyValuePair<string, object>("state4", Check.num == 5));
         worldData.Add(new KeyValuePair<string, object>("boxon", Check.boxon == 0));
 
 

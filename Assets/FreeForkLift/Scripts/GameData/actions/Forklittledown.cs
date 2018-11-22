@@ -54,14 +54,14 @@ public class Forklittledown : GoapAction
 
     public override bool checkProceduralPrecondition(GameObject agent)
     {
-        TargetComponent tar = (TargetComponent)agent.GetComponent(typeof(TargetComponent));
         CheckComponent check = (CheckComponent)agent.GetComponent(typeof(CheckComponent));
-        if (check.boxon == 0) {
-                target = tar.targ1;
+        if (check.boxon == 0)
+        {
+            target = forklift.Target[check.tcount].targ1;
         }
         else
         {
-            target = tar.GoalT1;
+            target = forklift.Target[check.tcount].GoalT1;
         }
         return true;
     }
